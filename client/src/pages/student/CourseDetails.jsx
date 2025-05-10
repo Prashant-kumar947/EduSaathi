@@ -172,7 +172,7 @@ const CourseDetails = () => {
         </div>
 
         {/* right column */}
-        <div className="z-10  rounded-t md:rounded-none overflow-hidden shadow-xl bg-white min-w-[300px] sm:min-w-[420px]">
+        <div className="z-10  rounded-t md:rounded-none overflow-hidden shadow-xl bg-white w-96 min-w-[300px]  sm:min-w-[420px]">
           {playerData ? (
             <YouTube
               videoId={playerData.videoId}

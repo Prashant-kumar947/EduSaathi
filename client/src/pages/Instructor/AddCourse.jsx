@@ -23,7 +23,6 @@ const AddCourse = () => {
 
   const handleChapter = (action, chapterId) => {
     if (action === "add") {
-      
       const title = prompt("Enter Chapter Name");
       if (title) {
         const newChapter = {
@@ -67,31 +66,35 @@ const AddCourse = () => {
     }
   };
 
-const addLecture =()=>{
-  setChapters(
-    chapters.map((chapter)=>{
-      if(chapter.chapterId === currentChapterId){
-        const newLecture ={
-          ...lectureDetails,lectureOrder: chapter.chapterContent.length>0 ? chapter.chapterContent.slice(-1)[0].lectureOrder +1 : 1,
-          lectureId :uniqid()
-        };
-        chapter.chapterContent.push(newLecture);
-      }
-      return chapter
-    })
-  );
-  setShowPopup(false);
-  setLectureDetails({
-    lectureTitle : '',
-    lectureDuration:'',
-    lectureUrl:'',
-    isPreviewFree: false,
-  });
-};
+  const addLecture = () => {
+    setChapters(
+      chapters.map((chapter) => {
+        if (chapter.chapterId === currentChapterId) {
+          const newLecture = {
+            ...lectureDetails,
+            lectureOrder:
+              chapter.chapterContent.length > 0
+                ? chapter.chapterContent.slice(-1)[0].lectureOrder + 1
+                : 1,
+            lectureId: uniqid(),
+          };
+          chapter.chapterContent.push(newLecture);
+        }
+        return chapter;
+      })
+    );
+    setShowPopup(false);
+    setLectureDetails({
+      lectureTitle: "",
+      lectureDuration: "",
+      lectureUrl: "",
+      isPreviewFree: false,
+    });
+  };
 
-const handleSubmit = async (e)=>{
-  e.preventDefault();
-}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
 
   useEffect(() => {
     //  Initiate Quill only once
@@ -104,7 +107,10 @@ const handleSubmit = async (e)=>{
 
   return (
     <div className="h-screen overflow-scroll flex flex-col items-start justify-between md:p-8 md:pb-8 p-4 pt-8 pb-0">
-      <form onClick={handleSubmit} className="flex flex-col gap-4 max-w-md w-full text-gray-500">
+      <form
+        onClick={handleSubmit}
+        className="flex flex-col gap-4 max-w-md w-full text-gray-500"
+      >
         <div className="flex flex-col gap-1">
           <p>Course Title</p>
           <input
@@ -175,7 +181,8 @@ const handleSubmit = async (e)=>{
             <div key={chapterIndex} className="bg-white border rounded-lg mb-4">
               <div className="flex justify-between items-center p-4 border-b">
                 <div className="flex items-center">
-                  <img onClick={()=>handleChapter('toggle',chapter.chapterId)}
+                  <img
+                    onClick={() => handleChapter("toggle", chapter.chapterId)}
                     src={assets.dropdown_icon}
                     width={14}
                     alt=""
@@ -193,7 +200,8 @@ const handleSubmit = async (e)=>{
                 </span>
                 <img
                   src={assets.cross_icon}
-                  alt="icon" onClick={()=>handleChapter('remove', chapter.chapterId)}
+                  alt="icon"
+                  onClick={() => handleChapter("remove", chapter.chapterId)}
                   className="cursor-pointer"
                 />
               </div>
@@ -218,13 +226,23 @@ const handleSubmit = async (e)=>{
                       </span>
                       <img
                         src={assets.cross_icon}
-                        alt="" onClick={()=> handleLecture('remove',chapter.chapterId,lectureIndex)}
+                        alt=""
+                        onClick={() =>
+                          handleLecture(
+                            "remove",
+                            chapter.chapterId,
+                            lectureIndex
+                          )
+                        }
                         className="cursor-pointer"
                       />
                     </div>
                   ))}
 
-                  <div className="inline-flex bg-gray-100 p-2 rounded cursor-pointer mt-2" onClick={()=> handleLecture('add', chapter.chapterId)}>
+                  <div
+                    className="inline-flex bg-gray-100 p-2 rounded cursor-pointer mt-2"
+                    onClick={() => handleLecture("add", chapter.chapterId)}
+                  >
                     + Add Lecture
                   </div>
                 </div>
@@ -241,7 +259,9 @@ const handleSubmit = async (e)=>{
           {showPopup && (
             <div className="fixed inset-0 flex items-center justify-center bg-gray-300/50 ">
               <div className="bg-white text-gray-700p-4 rounded relative w-full max-w-80 p-10">
-                <h2 className="text-lg text-black font-semibold mb-4">Add Lecture</h2>
+                <h2 className="text-lg text-black font-semibold mb-4">
+                  Add Lecture
+                </h2>
 
                 <div className="mb-2">
                   <p className="">Lecture Title</p>
@@ -291,22 +311,23 @@ const handleSubmit = async (e)=>{
                 <div className="flex gap-2 my-4">
                   <p> Is Preview Free?</p>
                   <input
-  type="checkbox"
-  className="mt-1 scale-125"
-  checked={lectureDetails.isPreviewFree}
-  onChange={(e) =>
-    setLectureDetails({
-      ...lectureDetails,
-      isPreviewFree: e.target.checked,
-    })
-  }
-/>
+                    type="checkbox"
+                    className="mt-1 scale-125"
+                    checked={lectureDetails.isPreviewFree}
+                    onChange={(e) =>
+                      setLectureDetails({
+                        ...lectureDetails,
+                        isPreviewFree: e.target.checked,
+                      })
+                    }
+                  />
                 </div>
 
                 <button
                   type="button"
                   className=" w-full bg-blue-400 text-white px-4 py-2 rounded "
-                onClick={addLecture} >
+                  onClick={addLecture}
+                >
                   Add
                 </button>
 
