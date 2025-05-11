@@ -17,7 +17,7 @@ export const clerkwebhooks = async (req,res)=>{
             case 'user.created':{
                 const userData ={
                     _id:data.id,
-                    email:data.email_addresses[0].email_addresses,
+                    email:data.email_addresses[0].email_address,
                     name:data.first_name + " " + data.last_name,
                     imageUrl: data.image_url,
                 }
